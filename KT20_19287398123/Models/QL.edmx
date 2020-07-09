@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLNETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LoaiMay">
+          <Key>
+            <PropertyRef Name="MaLoaiMay" />
+          </Key>
+          <Property Name="MaLoaiMay" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CauHinh" Type="varchar" MaxLength="255" />
+          <Property Name="GiaTien" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Hinh" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="May">
+          <Key>
+            <PropertyRef Name="MaM" />
+          </Key>
+          <Property Name="MaM" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TenMay" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaLoaiMay" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__May__MaLoaiMay__267ABA7A">
+          <End Role="LoaiMay" Type="Self.LoaiMay" Multiplicity="1" />
+          <End Role="May" Type="Self.May" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiMay">
+              <PropertyRef Name="MaLoaiMay" />
+            </Principal>
+            <Dependent Role="May">
+              <PropertyRef Name="MaLoaiMay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLNETModelStoreContainer">
+          <EntitySet Name="LoaiMay" EntityType="Self.LoaiMay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="May" EntityType="Self.May" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__May__MaLoaiMay__267ABA7A" Association="Self.FK__May__MaLoaiMay__267ABA7A">
+            <End Role="LoaiMay" EntitySet="LoaiMay" />
+            <End Role="May" EntitySet="May" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLNETModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LoaiMay">
+          <Key>
+            <PropertyRef Name="MaLoaiMay" />
+          </Key>
+          <Property Name="MaLoaiMay" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CauHinh" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GiaTien" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Hinh" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mays" Relationship="Self.FK__May__MaLoaiMay__267ABA7A" FromRole="LoaiMay" ToRole="May" />
+        </EntityType>
+        <EntityType Name="May">
+          <Key>
+            <PropertyRef Name="MaM" />
+          </Key>
+          <Property Name="MaM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenMay" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaLoaiMay" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LoaiMay" Relationship="Self.FK__May__MaLoaiMay__267ABA7A" FromRole="May" ToRole="LoaiMay" />
+        </EntityType>
+        <Association Name="FK__May__MaLoaiMay__267ABA7A">
+          <End Role="LoaiMay" Type="Self.LoaiMay" Multiplicity="1" />
+          <End Role="May" Type="Self.May" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiMay">
+              <PropertyRef Name="MaLoaiMay" />
+            </Principal>
+            <Dependent Role="May">
+              <PropertyRef Name="MaLoaiMay" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLNETEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LoaiMays" EntityType="Self.LoaiMay" />
+          <EntitySet Name="Mays" EntityType="Self.May" />
+          <AssociationSet Name="FK__May__MaLoaiMay__267ABA7A" Association="Self.FK__May__MaLoaiMay__267ABA7A">
+            <End Role="LoaiMay" EntitySet="LoaiMays" />
+            <End Role="May" EntitySet="Mays" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLNETModelStoreContainer" CdmEntityContainer="QLNETEntities">
+          <EntitySetMapping Name="LoaiMays">
+            <EntityTypeMapping TypeName="QLNETModel.LoaiMay">
+              <MappingFragment StoreEntitySet="LoaiMay">
+                <ScalarProperty Name="MaLoaiMay" ColumnName="MaLoaiMay" />
+                <ScalarProperty Name="CauHinh" ColumnName="CauHinh" />
+                <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
+                <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mays">
+            <EntityTypeMapping TypeName="QLNETModel.May">
+              <MappingFragment StoreEntitySet="May">
+                <ScalarProperty Name="MaM" ColumnName="MaM" />
+                <ScalarProperty Name="TenMay" ColumnName="TenMay" />
+                <ScalarProperty Name="MaLoaiMay" ColumnName="MaLoaiMay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

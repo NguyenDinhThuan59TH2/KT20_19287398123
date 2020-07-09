@@ -1,0 +1,80 @@
+﻿@model KT20_19287398123.Models.LoaiMay
+
+@{
+    ViewBag.Title = "Thêm Loại Máy";
+}
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/Content/text.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/form.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/noti.css" />
+}
+
+@section scripts {
+    <script src="~/Scripts/noti.js"></script>
+}
+
+<div>
+    <a href="@Url.Action("Index", new {})" class="btn btn-primary btn-sm">
+        <i class="fa fa-arrow-left"></i>
+        <span>
+            Quay về
+        </span>
+    </a>
+</div>
+<h2 class="text-title">Loại máy mới</h2>
+@using (Html.BeginForm("Create", "LoaiMays", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form">
+    <div class="form-group">
+        <div class="form-field">
+            <div class="form-label">
+                Mã loại máy:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.MaLoaiMay, new { htmlAttributes = new { @class = "form-input" } })
+                @Html.ValidationMessageFor(model => model.MaLoaiMay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="form-label">
+                Cấu hình:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.CauHinh, new { htmlAttributes = new { @class = "form-input" } })
+                @Html.ValidationMessageFor(model => model.CauHinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="form-label">
+                Giá tiền:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.GiaTien, new { htmlAttributes = new { @class = "form-input" } })
+                @Html.ValidationMessageFor(model => model.GiaTien, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-field">
+            <div class="form-label">
+                Hình:
+            </div>
+            <div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="Anh" multiple id="customFile" />
+                </div>
+                @Html.ValidationMessageFor(model => model.Hinh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="form-footer">
+        <div>
+            <input type="submit" value="Tạo máy" class="btn btn-success btn-sm" />
+        </div>
+    </div>
+}
+

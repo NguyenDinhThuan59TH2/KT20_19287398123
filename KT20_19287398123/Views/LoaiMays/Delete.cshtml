@@ -1,0 +1,55 @@
+﻿@model KT20_19287398123.Models.LoaiMay
+
+@{
+    ViewBag.Title = "Xóa Loại Máy";
+}
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/Content/text.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/image.css">
+}
+
+<h2 class="text-title">
+    @Html.DisplayFor(model => model.MaLoaiMay)
+    <img src="~/Images/@Model.Hinh" class="avarta-middel" style="margin-left: 10px" />
+</h2>
+
+<h3>
+    Bạn có chắc chắn muốn xóa khách hàng này?
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div style="display: flex; margin-bottom: 10px; margin-left: 20px; margin-top: 10px;">
+            <input type="submit" value="Xóa" class="btn btn-danger btn-sm" style="margin-right: 10px;" />
+            <div class="form-actions no-color">
+                <a href="@Url.Action("Index", new { })" class="btn btn-primary btn-sm">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>
+                        Quay về
+                    </span>
+                </a>
+            </div>
+        </div>
+    }
+</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Mã loại máy:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaLoaiMay)
+        </dd>
+        <dt>Cấu hình:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CauHinh)
+        </dd>
+        <dt>Giá Tiền:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GiaTien)
+        </dd>
+        
+    </dl>
+</div>
+

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<KT20_19287398123.Models.May>
+
+@{
+    ViewBag.Title = "Máy";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "MaM", rowsPerPage: 10);
+}
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/Content/search.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/grid.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/text.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/noti.css" />
+}
+
+@section scripts {
+    <script src="~/Scripts/noti.js"></script>
+}
+
+<h2 class="text-title">Máy</h2>
+<div class="grid">
+    <div class="grid-action">
+        <a href="@Url.Action("Create", new {})" class="btn btn-success btn-sm">
+            <i class="fa fa-plus"></i>
+            <span>Thêm máy</span>
+        </a>
+    </div>
+    @grid.GetHtml(
+        tableStyle: "table table-bordered table-hover",
+        footerStyle: "grid-footer",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.Numeric,
+        alternatingRowStyle: "alternatingRowStyle",
+        columns: new[]
+        {
+            grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+            grid.Column("MaM","Mã máy"),
+            grid.Column("TenMay","Tên máy"),
+            grid.Column("LoaiMay.CauHinh","Cấu hình"),
+            grid.Column("", "", format:
+            @<div>
+                <a href="@Url.Action("Edit", new { id = item.MaM })" class="btn btn-primary btn-sm">
+                    <i class="fa fa-pencil"></i>
+                    <span>Sửa</span>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.MaM })" class="btn btn-danger btn-sm">
+                    <i class="fa fa-plus"></i>
+                    <span>Xóa</span>
+                </a>
+                <a href="@Url.Action("Details", new { id = item.MaM })" class="btn btn-info btn-sm">
+                    <i class="fa fa-info"></i>
+                    <span>Xem thêm</span>
+                </a>
+            </div>
+            ),
+        }
+)
+</div>
